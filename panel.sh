@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # ===============================
-# OP X LEHEND FULL PANEL SYSTEM
+# OP X LEGEND FULL PANEL SYSTEM
 # ===============================
 
-# ---------- FILES ----------
+# ---------- USER DATABASE ----------
 USER_DB="$HOME/.opxlegend_users.db"
 mkdir -p "$HOME"
 touch "$USER_DB"
@@ -65,7 +65,7 @@ login_user() {
 # ---------- AUTH MENU ----------
 while true; do
   clear
-  echo -e "${YELLOW}OP X LEHEND AUTH SYSTEM${RESET}"
+  echo -e "${YELLOW}OP X LEGEND AUTH SYSTEM${RESET}"
   echo
   echo "[1] 🔐 Login"
   echo "[2] 📝 Register"
@@ -108,9 +108,6 @@ sleep 1
 github_vps() {
   clear
   echo -e "${CYAN}🚀 GitHub VPS Maker${RESET}"
-  echo
-  echo "✔ GitHub account লাগবে"
-  echo "✔ GitHub Actions VPS method"
   echo
   echo "Example Repo:"
   echo "https://github.com/afnan007a/GitHub-Actions-VPS"
@@ -155,6 +152,17 @@ kvm_check() {
   read -p "Press Enter to return..."
 }
 
+opx_24_7() {
+  clear
+  echo -e "${GREEN}♾ OP X LEGEND 24/7 ONLINE MODE STARTED${RESET}"
+  echo -e "${CYAN}Press CTRL + C to stop${RESET}"
+  sleep 1
+  while true; do
+    echo -e "${PURPLE}OP X LEGEND 24/7 ONLINE${RESET}"
+    sleep 0.5
+  done
+}
+
 # ---------- MAIN MENU ----------
 while true; do
   clear
@@ -165,8 +173,9 @@ while true; do
   echo "[3] ⚡ Fake Loading + Scan"
   echo "[4] 🌐 KVM VPS Checker"
   echo "[5] ❌ Exit"
+  echo "[6] ♾ OP X LEGEND 24/7 ONLINE"
   echo
-  read -p ">> Select Option [1-5]: " opt
+  read -p ">> Select Option [1-6]: " opt
 
   case $opt in
     1) github_vps ;;
@@ -174,6 +183,7 @@ while true; do
     3) fake_scan ;;
     4) kvm_check ;;
     5) exit ;;
+    6) opx_24_7 ;;
     *) echo "Invalid option"; sleep 1 ;;
   esac
 done
