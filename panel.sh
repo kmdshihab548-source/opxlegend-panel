@@ -6,15 +6,12 @@
 
 # ---------- USER DATABASE ----------
 USER_DB="$HOME/.opxlegend_users.db"
-mkdir -p "$HOME"
 touch "$USER_DB"
 
 # ---------- COLORS ----------
 RED="\e[31m"; GREEN="\e[32m"; YELLOW="\e[33m"
 BLUE="\e[34m"; PURPLE="\e[35m"; CYAN="\e[36m"
 WHITE="\e[97m"; RESET="\e[0m"
-
-colors=($RED $GREEN $YELLOW $BLUE $PURPLE $CYAN)
 
 # ---------- REGISTER ----------
 register_user() {
@@ -33,11 +30,7 @@ register_user() {
   read -s -p "Confirm Password: " cp
   echo
 
-  if [[ "$rp" != "$cp" ]]; then
-    echo -e "${RED}❌ Password not match${RESET}"
-    sleep 2
-    return
-  fi
+  [[ "$rp" != "$cp" ]] && echo -e "${RED}❌ Password not match${RESET}" && sleep 2 && return
 
   echo "$ru:$rp" >> "$USER_DB"
   echo -e "${GREEN}✅ Registration Successful${RESET}"
@@ -56,7 +49,7 @@ login_user() {
     echo -e "${GREEN}✅ Login Successful${RESET}"
     sleep 1
   else
-    echo -e "${RED}❌ Invalid Username or Password${RESET}"
+    echo -e "${RED}❌ Invalid Login${RESET}"
     sleep 2
     exit 1
   fi
@@ -66,80 +59,52 @@ login_user() {
 while true; do
   clear
   echo -e "${YELLOW}OP X LEGEND AUTH SYSTEM${RESET}"
-  echo
   echo "[1] 🔐 Login"
   echo "[2] 📝 Register"
   echo "[3] ❌ Exit"
-  echo
-  read -p "Select Option: " auth
+  read -p "Select Option: " a
 
-  case $auth in
+  case $a in
     1) login_user; break ;;
     2) register_user ;;
     3) exit ;;
-    *) echo "Invalid option"; sleep 1 ;;
+    *) echo "Invalid"; sleep 1 ;;
   esac
 done
 
 # ---------- LOGO ----------
 clear
-logo=(
-" ██████╗ ██████╗     ██╗  ██╗    ██╗     ███████╗██╗  ██╗███████╗███╗   ██╗██████╗ "
-"██╔═══██╗██╔══██╗    ╚██╗██╔╝    ██║     ██╔════╝██║  ██║██╔════╝████╗  ██║██╔══██╗"
-"██║   ██║██████╔╝     ╚███╔╝     ██║     █████╗  ███████║█████╗  ██╔██╗ ██║██║  ██║"
-"██║   ██║██╔═══╝      ██╔██╗     ██║     ██╔══╝  ██╔══██║██╔══╝  ██║╚██╗██║██║  ██║"
-"╚██████╔╝██║         ██╔╝ ██╗    ███████╗███████╗██║  ██║███████╗██║ ╚████║██████╔╝"
-" ╚═════╝ ╚═╝         ╚═╝  ╚═╝    ╚══════╝╚══════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝╚═════╝ "
-)
-
-i=0
-for l in "${logo[@]}"; do
-  echo -e "${colors[$i]}$l"
-  i=$(( (i+1) % 6 ))
-  sleep 0.05
-done
-
-echo -e "${RESET}"
-echo -e "${CYAN}NETWORK${RESET}"
-echo -e "${WHITE}Made by op x legend${RESET}"
+echo -e "${PURPLE}OP X LEGEND PANEL LOADED${RESET}"
 sleep 1
 
 # ---------- FUNCTIONS ----------
 github_vps() {
   clear
   echo -e "${CYAN}🚀 GitHub VPS Maker${RESET}"
-  echo
-  echo "Example Repo:"
-  echo "https://github.com/afnan007a/GitHub-Actions-VPS"
-  echo
-  echo "👉 Fork → Edit workflow → Run"
-  read -p "Press Enter to return..."
+  echo "Fork GitHub Actions VPS repo & run workflow"
+  read -p "Press Enter..."
 }
 
 idx_install() {
   clear
   echo -e "${YELLOW}🛠 IDX Auto Install${RESET}"
   if command -v pkg >/dev/null; then
-    pkg update -y
-    pkg install git -y
-    echo "✔ Termux ready"
+    pkg update -y && pkg install git -y
   else
-    sudo apt update -y
-    sudo apt install git -y
-    echo "✔ Linux ready"
+    sudo apt update -y && sudo apt install git -y
   fi
-  read -p "Press Enter to return..."
+  read -p "Press Enter..."
 }
 
 fake_scan() {
   clear
-  echo -e "${GREEN}⚡ Fake System Scan Started${RESET}"
-  for i in {1..25}; do
-    echo "[OK] Scanning module $i"
-    sleep 0.08
+  echo -e "${GREEN}⚡ Fake Loading + Scan${RESET}"
+  for i in {1..30}; do
+    echo "[OK] Scanning system module $i"
+    sleep 0.07
   done
   echo -e "${CYAN}✔ Scan Completed${RESET}"
-  read -p "Press Enter to return..."
+  read -p "Press Enter..."
 }
 
 kvm_check() {
@@ -149,17 +114,27 @@ kvm_check() {
   else
     echo -e "${RED}❌ KVM NOT SUPPORTED${RESET}"
   fi
-  read -p "Press Enter to return..."
+  read -p "Press Enter..."
 }
 
+# 🌈 MULTI COLOR 24/7 MODE
 opx_24_7() {
   clear
-  echo -e "${GREEN}♾ OP X LEGEND 24/7 ONLINE MODE STARTED${RESET}"
-  echo -e "${CYAN}Press CTRL + C to stop${RESET}"
+  echo -e "${GREEN}♾ OP X LEGEND 24/7 ONLINE MODE${RESET}"
+  echo -e "${CYAN}CTRL + C to stop${RESET}"
   sleep 1
+
+  colors=(
+    "\e[31m" "\e[32m" "\e[33m"
+    "\e[34m" "\e[35m" "\e[36m"
+    "\e[91m" "\e[92m" "\e[94m"
+  )
+
+  i=0
   while true; do
-    echo -e "${PURPLE}OP X LEGEND 24/7 ONLINE${RESET}"
-    sleep 0.5
+    echo -e "${colors[$i]}OP X LEGEND 24/7 ONLINE${RESET}"
+    i=$(( (i+1) % ${#colors[@]} ))
+    sleep 0.3
   done
 }
 
@@ -175,9 +150,9 @@ while true; do
   echo "[5] ❌ Exit"
   echo "[6] ♾ OP X LEGEND 24/7 ONLINE"
   echo
-  read -p ">> Select Option [1-6]: " opt
+  read -p ">> Select Option [1-6]: " o
 
-  case $opt in
+  case $o in
     1) github_vps ;;
     2) idx_install ;;
     3) fake_scan ;;
